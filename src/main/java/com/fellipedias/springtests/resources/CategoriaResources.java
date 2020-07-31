@@ -13,7 +13,7 @@ import com.fellipedias.springtests.services.CategoriaService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
-@RequestMapping(value="/categorias")
+@RequestMapping(value="/produtos")
 public class CategoriaResources {
 	
 	@Autowired
