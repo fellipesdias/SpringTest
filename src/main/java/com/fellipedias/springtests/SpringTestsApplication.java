@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fellipedias.springtests.domain.Categoria;
 import com.fellipedias.springtests.domain.Cidade;
+import com.fellipedias.springtests.domain.Cliente;
+import com.fellipedias.springtests.domain.Endereco;
 import com.fellipedias.springtests.domain.Estado;
 import com.fellipedias.springtests.domain.Produto;
+import com.fellipedias.springtests.domain.enums.TipoCliente;
 import com.fellipedias.springtests.repositories.CategoriaRepository;
 import com.fellipedias.springtests.repositories.CidadeRepository;
+import com.fellipedias.springtests.repositories.ClienteRepository;
+import com.fellipedias.springtests.repositories.EnderecoRepository;
 import com.fellipedias.springtests.repositories.EstadoRepository;
 import com.fellipedias.springtests.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class SpringTestsApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CidadeRepository  cidadeRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringTestsApplication.class, args);
@@ -62,10 +73,19 @@ public class SpringTestsApplication implements CommandLineRunner {
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2,c3));
 		
+		Cliente cli1 = new Cliente(null,"Roberto Silva","RobSil@gmail.com",TipoCliente.PESSOAFISICA,"31256478971");
+				
+		Endereco end1 = new Endereco(null,"Rua A","300","Apto 303","Jardim","35216548",cli1,c1);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(end1));
+			
+		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(end1));
 	}
 
 }
